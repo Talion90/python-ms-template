@@ -45,4 +45,21 @@ repos:
     hooks:
       - id: bandit
         args: [-r, ., -f, json, -o, bandit-report.json]
-        exclude: ^tests/ 
+        exclude: ^tests/
+
+  # Make commands for comprehensive checks
+  - repo: local
+    hooks:
+      - id: make-lint
+        name: Run make lint
+        entry: make lint
+        language: system
+        pass_filenames: false
+        always_run: true
+        
+      - id: make-test
+        name: Run make test
+        entry: make test
+        language: system
+        pass_filenames: false
+        always_run: true 
