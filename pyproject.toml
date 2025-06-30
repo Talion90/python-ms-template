@@ -87,7 +87,7 @@ skip_glob = [
     "__pycache__/*",
     ".git/*",
     ".pytest_cache/*",
-    ".mypy_cache/*", 
+    ".mypy_cache/*",
     ".ruff_cache/*",
     "dist/*",
     "build/*",

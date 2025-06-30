@@ -7,7 +7,7 @@ repos:
       - id: ruff
         args: [--fix]
         types_or: [python, pyi, jupyter]
-      # Formatter  
+      # Formatter
       - id: ruff-format
         types_or: [python, pyi, jupyter]
 
@@ -23,8 +23,8 @@ repos:
     rev: v1.8.0
     hooks:
       - id: mypy
-        additional_dependencies: [types-all]
-        args: [--ignore-missing-imports]
+        additional_dependencies: [types-click, types-requests]
+        args: [--ignore-missing-imports, --no-error-summary]
 
   # General quality checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -44,22 +44,15 @@ repos:
     rev: 1.7.5
     hooks:
       - id: bandit
-        args: [-r, ., -f, json, -o, bandit-report.json]
+        args: [--recursive, --format, json, --output, bandit-report.json]
         exclude: ^tests/
 
-  # Make commands for comprehensive checks
+  # Run tests with local system
   - repo: local
     hooks:
-      - id: make-lint
-        name: Run make lint
-        entry: make lint
+      - id: pytest
+        name: Run tests
+        entry: uv run pytest
         language: system
         pass_filenames: false
         always_run: true
-        
-      - id: make-test
-        name: Run make test
-        entry: make test
-        language: system
-        pass_filenames: false
-        always_run: true 
